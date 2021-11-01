@@ -16,7 +16,7 @@ public class Introductory extends World
     public Introductory()
     {    
         // Create a new world with 1050x850 cells with a cell size of 1x1 pixels.
-        super(1050, 850, 1); 
+        super(1280, 720, 1); 
         
         
         Computer playerScreen = new Computer();
