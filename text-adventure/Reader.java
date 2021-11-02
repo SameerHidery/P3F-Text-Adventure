@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Reader
 {
-    static String url = "https://gist.githubusercontent.com/SameerHidery/09bc986e5fc4fa301a20bb22f8a12234/raw/07edb7a22d15ecf10888b8232b4c4d797280e135/IntroductoryChapter.txt";
+    static String url = "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/8a567c648454ee550ce3df8cfb626baddcb52b2c/IntroductoryChapter.txt";
 
     public static void readInto(Queue<String> q) throws Exception {
         URL wordsURL = new URL(url);

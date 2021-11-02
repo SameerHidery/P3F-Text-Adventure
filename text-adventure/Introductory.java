@@ -10,7 +10,8 @@ import java.util.ArrayList;
  */
 public class Introductory extends World
 {
-    Queue<String> myQ = new Queue<String>();
+    Queue<String> storyQueue = new Queue<String>();
+    Label storyLabel = new Label("", 35);
     
     /**
      * Constructor for objects of class Introductory.
@@ -22,18 +23,25 @@ public class Introductory extends World
         super(1280, 720, 1); 
  
         try{
-            Reader.readInto(myQ);
+            Reader.readInto(storyQueue);
             } catch(Exception e) {
         }
-            
-        int y = 90;
-        while(!myQ.isEmpty() && Greenfoot.mouseClicked(null))
+        
+        int x = 340;
+        int y = 120;
+        addObject(storyLabel, x, y);
+    }
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(null) && !storyQueue.isEmpty())
         {
-                Label text1 = new Label(myQ.dequeue(), 30);
-                addObject(text1, 340, y);
-
-                y += 25;
+            String sentence = storyQueue.dequeue();
+            String newSentence = "";
+            
+            storyLabel.setValue(sentence);
+            
         }
     }
 }
+
 
