@@ -21,8 +21,8 @@ public class TitleScreen extends World
         super(1280, 720, 1);  
         
         // Adding the labels to the title screen
-        addObject(titleLabel, 400, 200);
-        addObject(startGame, 400, 550);
+        addObject(titleLabel, 640, 200);
+        addObject(startGame, 640, 550);
     }
     
     /** 
