@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class TitleScreen extends World
 {
     //Create labels
-    Label titleLabel = new Label("Late Night Office Hours", 80);
-    Label startGame = new Label("Press space to start", 40);
+    Label titleLabel = new Label("Late Night Office Hours", 65);
+    Label startGame = new Label("Click mouse to go next", 40);
     /**
      * Constructor for objects of class TitleScren.
      * 
@@ -21,8 +21,8 @@ public class TitleScreen extends World
         super(1280, 720, 1);  
         
         // Adding the labels to the title screen
-        addObject(titleLabel, 640, 200);
-        addObject(startGame, 640, 550);
+        addObject(titleLabel, 350, 200);
+        addObject(startGame, 350, 400);
     }
     
     /** 
@@ -31,7 +31,7 @@ public class TitleScreen extends World
      */
     public void act()
     {
-        if(Greenfoot.isKeyDown("space"))
+        if(Greenfoot.mouseClicked(null))
         {
             Introductory gameWorld = new Introductory();
             Greenfoot.setWorld(gameWorld);
