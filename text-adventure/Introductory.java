@@ -12,7 +12,6 @@ public class Introductory extends World
 {
     ArrayList<String> myList = new ArrayList<String>();
     
-    
     /**
      * Constructor for objects of class Introductory.
      * 
@@ -21,18 +20,13 @@ public class Introductory extends World
     {    
         // Create a new world with 1050x850 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
-        
-        for(int i = 0; i < myList.size(); i++)
-        {
-            Label titleLabel = new Label(myList.get(i), 80);
-        }
-        
+ 
         try{
             Reader.readInto(myList);
             } catch(Exception e) {
             }
             
-        System.out.println(myList.get(3));
+        showText(myList.get(0), 640, 300);
 
     }
 }
