@@ -1,4 +1,5 @@
 #Greenfoot project file
+class.Introductory.image=Office\ Setting\ -\ LightDark.png
 dependency1.from=Introductory
 dependency1.to=Label
 dependency1.type=UsesDependency
@@ -14,10 +15,10 @@ dependency4.type=UsesDependency
 dependency5.from=Computer
 dependency5.to=Reader
 dependency5.type=UsesDependency
-editor.fx.0.height=1056
-editor.fx.0.width=1936
-editor.fx.0.x=-8
-editor.fx.0.y=-8
+editor.fx.0.height=881
+editor.fx.0.width=922
+editor.fx.0.x=849
+editor.fx.0.y=156
 height=1056
 package.numDependencies=5
 package.numTargets=11
