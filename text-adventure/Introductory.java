@@ -10,8 +10,7 @@ import java.util.ArrayList;
  */
 public class Introductory extends World
 {
-    ArrayList<String> myList = new ArrayList<String>();
-    
+    Queue<String> myQ = new Queue<String>();
     
     /**
      * Constructor for objects of class Introductory.
@@ -21,19 +20,20 @@ public class Introductory extends World
     {    
         // Create a new world with 1050x850 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
-        
-        for(int i = 0; i < myList.size(); i++)
-        {
-            Label titleLabel = new Label(myList.get(i), 80);
-        }
-        
+ 
         try{
-            Reader.readInto(myList);
+            Reader.readInto(myQ);
             } catch(Exception e) {
-            }
+        }
             
-        System.out.println(myList.get(3));
+        int y = 90;
+        while(!myQ.isEmpty() && Greenfoot.mouseClicked(null))
+        {
+                Label text1 = new Label(myQ.dequeue(), 30);
+                addObject(text1, 340, y);
 
+                y += 25;
+        }
     }
 }
 

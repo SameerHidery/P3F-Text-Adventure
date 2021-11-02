@@ -10,17 +10,13 @@ import java.util.ArrayList;
  */
 public class Computer extends Actor
 {
-    ArrayList<String> myList = new ArrayList<String>();
+
     /**
      * Act - do whatever the Computer wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        try{
-            Reader.readInto(myList);
-        }
-        catch(Exception e){      
-        }
+
     }
 }
