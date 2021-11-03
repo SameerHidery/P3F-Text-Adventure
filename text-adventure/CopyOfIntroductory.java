@@ -13,8 +13,15 @@ public class CopyOfIntroductory extends World
 {
     Queue<String> storyQueue = new Queue<String>();
     Queue<String> storyQueue2 = new Queue<String>();
-    
-    HashMap<String, String> decisions = new HashMap<String, String>();
+    Queue<String> storyQueue3 = new Queue<String>();
+    Queue<String> storyQueue4 = new Queue<String>();
+    Queue<String> storyQueue5 = new Queue<String>();
+    Queue<String> storyQueue6 = new Queue<String>();
+    Queue<String> storyQueue7 = new Queue<String>();
+    Queue<String> storyQueue8 = new Queue<String>();
+    Queue<String> storyQueue9 = new Queue<String>();
+    Queue<String> storyQueue10 = new Queue<String>();
+    HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
     Label storyLabel1 = new Label("", 35);
     Label storyLabel2 = new Label("", 35);
@@ -26,6 +33,13 @@ public class CopyOfIntroductory extends World
     
     Label choice1 = new Label("Yes", 40);
     Label choice2 = new Label("No", 40);
+    
+    boolean first;
+    boolean second;
+    boolean third;
+    boolean fourth;
+    boolean fifth;
+    boolean sixth;
     
     int x = 340;
     int y = 120;
@@ -67,9 +81,10 @@ public class CopyOfIntroductory extends World
         if(Greenfoot.mouseClicked(yesButton)){
             removeObject(yesButton);
             removeObject(noButton);
-            decisions.put("one", "true");
+            decisions.put("one", true);
+            first = decisions.get("one");
         }
-        if(!storyQueue2.isEmpty() && decisions.get("one").equals("true")){
+        if(!storyQueue2.isEmpty() && first == true){
             if(Greenfoot.mouseClicked(null)){
                 print(storyQueue2);
             }
@@ -89,8 +104,7 @@ public class CopyOfIntroductory extends World
             storyLabel1.setValue(sub1);
             String sub2 = str.substring(line1, line2);
             storyLabel2.setValue(sub2);
-            String sub3 = str.substring(line2);
-            storyLabel3.setValue(sub3);
+            storyLabel3.setValue(" ");
             storyLabel4.setValue(" ");
         }
         else if(str.length() > 82 && str.length() < 124){
