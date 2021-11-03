@@ -10,9 +10,8 @@ import java.util.ArrayList;
  */
 public class Reader
 {
-    static String url = "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/8a567c648454ee550ce3df8cfb626baddcb52b2c/IntroductoryChapter.txt";
 
-    public static void readInto(Queue<String> q) throws Exception {
+    public static void readInto(Queue<String> q, String url) throws Exception {
         URL wordsURL = new URL(url);
         BufferedReader in = new BufferedReader(
         new InputStreamReader(wordsURL.openStream()));

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Reader
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Reader\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=q
-comment1.target=void\ readInto(Queue)
+comment1.params=q\ url
+comment1.target=void\ readInto(Queue,\ java.lang.String)
 numComments=2
