@@ -16,6 +16,12 @@ public class Introductory extends World
     Label storyLabel3 = new Label("", 35);
     Label storyLabel4 = new Label("", 35);
     
+    Button yesButton = new Button();
+    Button noButton = new Button();
+    
+    Label choice1 = new Label("Yes", 40);
+    Label choice2 = new Label("No", 40);
+    
     int x = 340;
     int y = 120;
     /**
@@ -37,8 +43,6 @@ public class Introductory extends World
         addObject(storyLabel3, x, y + 60);
         addObject(storyLabel4, x, y + 90);
         
-        
-        
     }
     public void act()
     {
@@ -46,9 +50,15 @@ public class Introductory extends World
         {
             String sentence = storyQueue.dequeue();
             nextText(sentence);
-
         }
-        
+
+        if(storyQueue.isEmpty())
+        {
+            addObject(yesButton, 200, 360);
+            addObject(noButton, 480, 360);
+            addObject(choice1, 200, 360);
+            addObject(choice2, 480, 360);
+        }
     }
     public void nextText(String str)
     {
