@@ -9,17 +9,17 @@ import java.util.HashMap;
  * @author Sameer Hidery
  * @version 1.1
  */
-public class CopyOfIntroductory extends World
+public class Introductory extends World
 {
     Queue<String> introductory = new Queue<String>();
     Queue<String> withHeadphones = new Queue<String>();
     Queue<String> noHeadphones = new Queue<String>();
     Queue<String> offLockdown= new Queue<String>();
     Queue<String> onLockdown = new Queue<String>();
-    Queue<String> storyQueue6 = new Queue<String>();
-    Queue<String> storyQueue7 = new Queue<String>();
-    Queue<String> storyQueue8 = new Queue<String>();
-    Queue<String> storyQueue9 = new Queue<String>();
+    Queue<String> callGrandma = new Queue<String>();
+    Queue<String> callMom = new Queue<String>();
+    Queue<String> callManager = new Queue<String>();
+    Queue<String> runToElevator = new Queue<String>();
     Queue<String> storyQueue10 = new Queue<String>();
     Queue<String> storyQueue11 = new Queue<String>();
     
@@ -52,7 +52,7 @@ public class CopyOfIntroductory extends World
      * Constructor for objects of class CopyOfIntroductory.
      * 
      */
-    public CopyOfIntroductory()
+    public Introductory()
     {    
         // Create a new world with 1050x850 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
@@ -77,8 +77,19 @@ public class CopyOfIntroductory extends World
             Reader.readInto(onLockdown, "https://gist.githubusercontent.com/SameerHidery/de6697d484c96008365eb387a53a3dba/raw/bd9a8fd1cc8230514a76114023543d203d0b5543/KeepLockdownOn");
             } catch(Exception e) {
         }
+        try{
+            Reader.readInto(callGrandma, "https://gist.githubusercontent.com/SameerHidery/201137d60ce73adcccd664dc80a358c4/raw/77a5e8b0f4b05f71c5b2a010718222fdbb151e40/GrandmaCall");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(callMom, "https://gist.githubusercontent.com/SameerHidery/27fbaf4d077166f6712c91830904e125/raw/22dc0d3cf9d9b0dc596e0d80d3a3f13973cc1c06/callMom");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(callManager, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/2adfb135eb59f23352e15236993400b0bd7ec376/callManager");
+            } catch(Exception e) {
+        }
         
-
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
         addObject(storyLabel3, x, y + 60);
@@ -119,6 +130,24 @@ public class CopyOfIntroductory extends World
                 third = decisions.get("three");
                 part++;
             }
+            else if(part == 3)
+            {
+                decisions.put("four", true);
+                fourth = decisions.get("four");
+                part++;
+            }
+            else if(part == 4)
+            {
+                decisions.put("five", true);
+                fifth = decisions.get("five");
+                part++;
+            }
+            else if(part == 5)
+            {
+                decisions.put("six", true);
+                sixth = decisions.get("six");
+                part++;
+            }
         }
         
         //Determines false if the right button was clicked for all the decisions and stores each in the hashmap 
@@ -137,6 +166,24 @@ public class CopyOfIntroductory extends World
             else if(part == 2){
                 decisions.put("three", false);
                 third = decisions.get("three");
+                part++;
+            }
+            else if(part == 3)
+            {
+                decisions.put("four", false);
+                fourth = decisions.get("four");
+                part++;
+            }
+            else if(part == 4)
+            {
+                decisions.put("five", false);
+                fifth = decisions.get("five");
+                part++;
+            }
+            else if(part == 5)
+            {
+                decisions.put("six", false);
+                sixth = decisions.get("six");
                 part++;
             }
         }
@@ -162,7 +209,6 @@ public class CopyOfIntroductory extends World
             }
         }
         
-        
         if(part == 2){
             if(!offLockdown.isEmpty() && second == true && Greenfoot.mouseClicked(null)){
                 print(offLockdown);
@@ -181,12 +227,26 @@ public class CopyOfIntroductory extends World
                 }
             }
         }
-        choices();
-    }
-    
-    public void choices()
-    {
+        if(part == 3 && second == true){
+            if(!callMom.isEmpty() && third == true && Greenfoot.mouseClicked(null))
+            {
+                print(callMom);
+            }
+            if(!callGrandma.isEmpty() && third == false && Greenfoot.mouseClicked(null))
+            {
+                print(callGrandma);
+            }
+            if(callGrandma.isEmpty() || callMom.isEmpty()){
+                gameLost();
+            }
+        }
+        
 
+    }
+    public void gameLost()
+    {
+        EndScreen end = new EndScreen();
+        Greenfoot.setWorld(end);
     }
     public void addButtons()
     {
