@@ -11,28 +11,33 @@ import java.util.HashMap;
  */
 public class CopyOfIntroductory extends World
 {
-    Queue<String> storyQueue = new Queue<String>();
-    Queue<String> storyQueue2 = new Queue<String>();
-    Queue<String> storyQueue3 = new Queue<String>();
-    Queue<String> storyQueue4 = new Queue<String>();
-    Queue<String> storyQueue5 = new Queue<String>();
+    Queue<String> introductory = new Queue<String>();
+    Queue<String> withHeadphones = new Queue<String>();
+    Queue<String> noHeadphones = new Queue<String>();
+    Queue<String> offLockdown= new Queue<String>();
+    Queue<String> onLockdown = new Queue<String>();
     Queue<String> storyQueue6 = new Queue<String>();
     Queue<String> storyQueue7 = new Queue<String>();
     Queue<String> storyQueue8 = new Queue<String>();
     Queue<String> storyQueue9 = new Queue<String>();
     Queue<String> storyQueue10 = new Queue<String>();
+    Queue<String> storyQueue11 = new Queue<String>();
+    
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
-    Label storyLabel1 = new Label("", 35);
-    Label storyLabel2 = new Label("", 35);
-    Label storyLabel3 = new Label("", 35);
-    Label storyLabel4 = new Label("", 35);
+    //Create labels to chop up sentences. Shouldn't take more than 4 lines
+    Label storyLabel1 = new Label("", 33);
+    Label storyLabel2 = new Label("", 33);
+    Label storyLabel3 = new Label("", 33);
+    Label storyLabel4 = new Label("", 33);
     
-    Button yesButton = new Button();
-    Button noButton = new Button();
+    Button trueButton = new Button();
+    Button falseButton = new Button();
     
-    Label choice1 = new Label("Yes", 40);
-    Label choice2 = new Label("No", 40);
+    Label choice1 = new Label(" ", 40);
+    Label choice2 = new Label(" ", 40);
+    
+    int part = 0;
     
     boolean first;
     boolean second;
@@ -53,11 +58,23 @@ public class CopyOfIntroductory extends World
         super(1280, 720, 1); 
  
         try{
-            Reader.readInto(storyQueue, "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/00be957644600fc11c624fc5e154ed22b62604f4/IntroductoryChapter.txt");
+            Reader.readInto(introductory, "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/00be957644600fc11c624fc5e154ed22b62604f4/IntroductoryChapter.txt");
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(storyQueue2, "https://gist.githubusercontent.com/SameerHidery/f1a705ee1f1879e7b8814465a7153305/raw/1a15682b0bfe41349d669811ff81721a4102ba35/YesHeadphones");
+            Reader.readInto(withHeadphones, "https://gist.githubusercontent.com/SameerHidery/f1a705ee1f1879e7b8814465a7153305/raw/1a15682b0bfe41349d669811ff81721a4102ba35/YesHeadphones");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(noHeadphones, "https://gist.githubusercontent.com/SameerHidery/a737bb3120e031e61523528556701193/raw/830d183da1ef30988c9b5aa78590d914ade7484c/noHeadphones");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(offLockdown, "https://gist.githubusercontent.com/SameerHidery/23c46a1f67268cece75ee34e9c19bdab/raw/1d53b7683367c80eddd5d5940f20772b5460c483/TurnOffLockdownSystem");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(onLockdown, "https://gist.githubusercontent.com/SameerHidery/de6697d484c96008365eb387a53a3dba/raw/bd9a8fd1cc8230514a76114023543d203d0b5543/KeepLockdownOn");
             } catch(Exception e) {
         }
         
@@ -70,25 +87,120 @@ public class CopyOfIntroductory extends World
     }
     public void act()
     {
-        if(Greenfoot.mouseClicked(null) && !storyQueue.isEmpty())
+        /**
+         * First part of story with first decision for the user
+         */
+        if(Greenfoot.mouseClicked(null) && !introductory.isEmpty())
         {
-            print(storyQueue);
-            if(storyQueue.isEmpty()){
-            addObject(yesButton, 200, 360);
-            addObject(noButton, 480, 360);
+            print(introductory);
+            if(introductory.isEmpty()){
+                addButtons();
+                choice1.setValue("Yes");
+                choice2.setValue("No");
             }
         }
-        if(Greenfoot.mouseClicked(yesButton)){
-            removeObject(yesButton);
-            removeObject(noButton);
-            decisions.put("one", true);
-            first = decisions.get("one");
-        }
-        if(!storyQueue2.isEmpty() && first == true){
-            if(Greenfoot.mouseClicked(null)){
-                print(storyQueue2);
+        
+        //if the left choice is clicked
+        if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
+            removeButtons();
+            if(part == 0){
+                decisions.put("one", true);
+                first = decisions.get("one");
+                part++;
+            }
+            else if(part == 1){
+                decisions.put("two", true);
+                second = decisions.get("two");
+                part++;
+            }
+            else if(part == 2)
+            {
+                decisions.put("three", true);
+                third = decisions.get("three");
+                part++;
             }
         }
+        
+        //Determines false if the right button was clicked for all the decisions and stores each in the hashmap 
+        if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
+            removeButtons();
+            if(part == 0){
+                decisions.put("one", false);
+                first = decisions.get("one");
+                part++;
+            }
+            else if(part == 1){
+                decisions.put("two", false);
+                second = decisions.get("two");
+                part++;
+            }
+            else if(part == 2){
+                decisions.put("three", false);
+                third = decisions.get("three");
+                part++;
+            }
+        }
+        /**
+         * The story continues from when the user chooses to put on headphones or not
+         */
+        if(part == 1){
+            if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
+                print(withHeadphones);
+                if(withHeadphones.isEmpty()){
+                    addButtons();
+                    choice1.setValue("Turn it off");
+                    choice2.setValue("Keep it on");
+                }
+            }
+            if(!noHeadphones.isEmpty() && first == false && Greenfoot.mouseClicked(null)){
+                print(noHeadphones);
+                if(noHeadphones.isEmpty()){
+                    addButtons();
+                    choice1.setValue("Turn it off");
+                    choice2.setValue("Keep it on");        
+                }
+            }
+        }
+        
+        
+        if(part == 2){
+            if(!offLockdown.isEmpty() && second == true && Greenfoot.mouseClicked(null)){
+                print(offLockdown);
+                if(offLockdown.isEmpty()){
+                    addButtons();
+                    choice1.setValue("Mother");
+                    choice2.setValue("Grandma");
+                }
+            }
+            if(!onLockdown.isEmpty() && second == false && Greenfoot.mouseClicked(null)){
+                print(onLockdown);
+                if(onLockdown.isEmpty()){
+                    addButtons();
+                    choice1.setValue("Yell at him");
+                    choice2.setValue("Complain");
+                }
+            }
+        }
+        choices();
+    }
+    
+    public void choices()
+    {
+
+    }
+    public void addButtons()
+    {
+        addObject(trueButton, 200, 360);
+        addObject(falseButton, 480, 360);
+        addObject(choice1, trueButton.getX(), trueButton.getY());
+        addObject(choice2, falseButton.getX(), falseButton.getY());
+    }
+    public void removeButtons()
+    {
+        removeObject(trueButton);
+        removeObject(falseButton);
+        removeObject(choice1);
+        removeObject(choice2);
     }
     public void print(Queue<String> q)
     {
@@ -99,10 +211,10 @@ public class CopyOfIntroductory extends World
     {
         if(str.length() > 41 && str.length() < 83){
             int line1 = str.lastIndexOf(" ", 41);
-            int line2 = str.lastIndexOf(" ", 82);
+            //int line2 = str.lastIndexOf(" ", 82);
             String sub1 = str.substring(0, line1);
             storyLabel1.setValue(sub1);
-            String sub2 = str.substring(line1, line2);
+            String sub2 = str.substring(line1);
             storyLabel2.setValue(sub2);
             storyLabel3.setValue(" ");
             storyLabel4.setValue(" ");
