@@ -48,10 +48,6 @@ public class handphone extends Actor
         passIndex third = new passIndex();
         passIndex fourth = new passIndex();
             
-        fullCircle firstC = new fullCircle();
-        fullCircle secondC = new fullCircle();
-        fullCircle thirdC = new fullCircle();
-        fullCircle fourthC = new fullCircle();
         
        
         if (Greenfoot.mouseClicked(this) && screenDisplay == 0)
@@ -77,24 +73,23 @@ public class handphone extends Actor
             }
             else if(numPass == 1)
             {
-                world.addObject(firstC, 905, 215);
+                //switch
             }
             else if(numPass == 2)
             {
-
-                world.addObject(secondC, 935, 215);
+                //switch
             }
             else if(numPass == 3)
             {
                 
-                world.addObject(thirdC, 965, 215);
+                //switch
             }
             else if(numPass == 4)
             {
 
-                world.addObject(fourthC, 995, 215);
+                //switch
                 System.out.println("---");
-                if((playerPass[0]== 0) && (playerPass[1] == 5) && (playerPass[2] == 2) && (playerPass[3] == 2 ))
+                if((playerPass[0]== 4) && (playerPass[1] == 0) && (playerPass[2] == 4) && (playerPass[3] == 7 ))
                 {
                     System.out.println("pass");
                     numPass= 0;
@@ -117,10 +112,7 @@ public class handphone extends Actor
                    System.out.println("fail");
                    numPass= 0;
                    
-                   world.removeObject(firstC);
-                   world.removeObject(secondC);
-                   world.removeObject(thirdC);
-                   world.removeObject(fourthC);
+                   //switch back 
                 }
             }
         }

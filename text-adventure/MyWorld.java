@@ -28,9 +28,10 @@ public class MyWorld extends World
     public void keyPad()
     {
         
+        deleteBut del = new deleteBut();
         if(handphone.screenDisplay == 0)
         {
-            deleteBut del = new deleteBut();
+            
             addObject(del, 860, 615);
             
             keys = new ButtonKey[10];
@@ -50,10 +51,10 @@ public class MyWorld extends World
             addObject(keys[9], 1045, 464);
             addObject(keys[0], 950, 561);
         }
-        
         // Player got the password correct
-        if(handphone.screenDisplay==1)
+        else if(handphone.screenDisplay==1)
         {  
+            removeObject(del);
             for(ButtonKey key : keys)
             {
                 removeObject(key);

@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class passIndex extends Actor
 {
+    public boolean selected = false;
     public passIndex()
     {
         GreenfootImage image = getImage();

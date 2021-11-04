@@ -29,6 +29,7 @@ public class ButtonKey extends Actor
         {
             handphone.playerPass[handphone.numPass]= value; 
             handphone.numPass++;
+            
         }
     }    
 }
