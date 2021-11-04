@@ -62,10 +62,7 @@ public class handphone extends Actor
             setImage(image);
             world.keyPad();
             screenDisplay = 1;
-            
-            
-          
-            
+   
 
         }
     

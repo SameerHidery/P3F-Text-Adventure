@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-
+    ButtonKey[] keys = new ButtonKey[10];
+    
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -26,44 +27,37 @@ public class MyWorld extends World
     
     public void keyPad()
     {
-        buttonOne one = new buttonOne();
+        
         if(handphone.screenDisplay == 0)
         {
             deleteBut del = new deleteBut();
             addObject(del, 860, 615);
             
-            addObject(one, 855, 270);
+            keys = new ButtonKey[10];
+            for(int i = 0; i < 10; i++)
+            {
+                keys[i] = new ButtonKey(i);
+            }
             
-            buttonTwo two = new buttonTwo();
-            addObject(two, 950, 270);
-            
-            buttonThree three = new buttonThree();
-            addObject(three, 1045, 270);
-                    
-            buttonFour four = new buttonFour();
-            addObject(four, 855, 367);
-                    
-            buttonFive five = new buttonFive();
-            addObject(five, 950, 367);
-                    
-            buttonSix six = new buttonSix();
-            addObject(six, 1045, 367);
-                    
-            buttonSeven seven = new buttonSeven();
-            addObject(seven, 855, 464);
-                    
-            buttonEight eight = new buttonEight();
-            addObject(eight, 950, 464);
-                    
-            buttonNine nine = new buttonNine();
-            addObject(nine, 1045, 464);
-                    
-            buttonZero zero = new buttonZero();
-            addObject(zero, 950, 561);
+            addObject(keys[1], 855, 270);
+            addObject(keys[2], 950, 270);
+            addObject(keys[3], 1045, 270);
+            addObject(keys[4], 855, 367);
+            addObject(keys[5], 950, 367);
+            addObject(keys[6], 1045, 367);
+            addObject(keys[7], 855, 464);
+            addObject(keys[8], 950, 464);
+            addObject(keys[9], 1045, 464);
+            addObject(keys[0], 950, 561);
         }
+        
+        // Player got the password correct
         if(handphone.screenDisplay==1)
-        {
-            removeObject(one);
+        {  
+            for(ButtonKey key : keys)
+            {
+                removeObject(key);
+            }
         }
         
         
