@@ -21,7 +21,6 @@ public class TitleScreen extends World
         super(1280, 720, 1);  
         
         // Adding the labels to the title screen
-        addObject(titleLabel, 350, 200);
         addObject(startGame, 350, 400);
     }
     
@@ -33,6 +32,7 @@ public class TitleScreen extends World
     {
         if(Greenfoot.mouseClicked(null))
         {
+            
         }    
 
     }
