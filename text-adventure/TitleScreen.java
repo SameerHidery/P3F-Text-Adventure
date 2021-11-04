@@ -33,7 +33,7 @@ public class TitleScreen extends World
     {
         if(Greenfoot.mouseClicked(null))
         {
-            CopyOfIntroductory gameWorld = new CopyOfIntroductory();
+            Introductory gameWorld = new Introductory();
             Greenfoot.setWorld(gameWorld);
         }    
 
