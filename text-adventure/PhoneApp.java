@@ -25,6 +25,7 @@ public class PhoneApp extends Actor
         {
             handphone.screenDisplay = 3;
             world.removeObject(this);
+            world.openContacts();
             
         }
     }    

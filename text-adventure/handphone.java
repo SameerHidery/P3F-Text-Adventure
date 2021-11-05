@@ -85,10 +85,10 @@ public class handphone extends Actor
                         world.keyPad();
                         screenDisplay = 2;
                         
+                        
                       
             
                     }
-                    
                 }
                 else
                 {
@@ -107,6 +107,13 @@ public class handphone extends Actor
             GreenfootImage image = getImage();
             image.scale(356, 635);
             setImage(image);
+            
+            
+        }
+        if(screenDisplay == 4)
+        {
+            world.removeObject(this);
+            world.closeContacts();
         }
        
     }

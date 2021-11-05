@@ -10,6 +10,7 @@ public class MyWorld extends World
 {
     ButtonKey[] keys = new ButtonKey[10];
     passIndex[] circle = new passIndex[4];
+    ContactList[] list = new ContactList[3];
     
     /**
      * Constructor for objects of class MyWorld.
@@ -77,6 +78,28 @@ public class MyWorld extends World
             addObject(new PhoneApp(), 853, 627);
         }
 
+    }
+    
+    public void openContacts()
+    {
+        list = new ContactList[3];
+        for(int c = 0; c<3; c++)
+        {
+            list[c] = new ContactList(c);
+        }
+        
+        addObject(list[0], 947, 216);
+        addObject(list[1], 947, 371);
+        addObject(list[2], 947, 531);
+        
+    }
+    
+    public void closeContacts()
+    {
+        for(ContactList all : list)
+        {
+            removeObject(all);
+        }
     }
 
 
