@@ -90,17 +90,17 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(runToStairwell, "https://gist.githubusercontent.com/SameerHidery/f248d7f7370b88ff82de0a14b0bfafba/raw/d289df7c68bddc103ee6ad1a916308dfa37012c4/runToStairwell");
-            } catch(Exception e) {
-        }
-        try{
-            Reader.readInto(runToElevator, "https://gist.githubusercontent.com/SameerHidery/911d96469925c84c3a0a96221c4e499b/raw/1fad9731dff1b3a69fb562f8932858c30bcd9509/runToElevator");
-            } catch(Exception e) {
-        }
-        try{
-            Reader.readInto(viewFax, "https://gist.githubusercontent.com/SameerHidery/3e9159699cedd84e2d26fa1f9963d7bd/raw/1deca3ad58116459b66ca4c8d63f78bbf15bfe5c/ViewFax");
+            Reader.readInto(viewFax, "https://gist.githubusercontent.com/SameerHidery/3e9159699cedd84e2d26fa1f9963d7bd/raw/11434a579ad08a413c5c3d1d6cd4eab609510506/ViewFax");
             } catch(Exception e) {
         }      
+        try{
+            Reader.readInto(runToStairwell, "https://gist.githubusercontent.com/SameerHidery/f248d7f7370b88ff82de0a14b0bfafba/raw/0b94db914b27c886afe9ec904e198ca3bd30195f/runToStairwell");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(runToElevator, "https://gist.githubusercontent.com/SameerHidery/911d96469925c84c3a0a96221c4e499b/raw/1fa430ca8792fdd2daa5b2da8289283de4a3d859/runToElevator");
+            } catch(Exception e) {
+        }
         
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
@@ -154,6 +154,11 @@ public class Introductory extends World
                 fifth = decisions.get("five");
                 part++;
             }
+            else if(part == 5)
+            {
+                decisions.put("six", true);
+                fifth = decisions.get("six");
+            }
         }
         
         //Determines false if the right button was clicked for all the decisions and stores each in the hashmap 
@@ -186,6 +191,12 @@ public class Introductory extends World
                 fifth = decisions.get("five");
                 part++;
             }
+            else if(part == 5)
+            {
+                decisions.put("six", false);
+                fifth = decisions.get("six");
+            }
+            
         }
         /**
          * The story continues from when the user chooses to put on headphones or not
@@ -247,6 +258,43 @@ public class Introductory extends World
                     addButtons();
                     choice1.setValue("View fax");
                     choice2.setValue("Run to...");
+                }
+            }
+        }
+        if(part == 4)
+        {
+            if(!viewFax.isEmpty() && fourth == true && Greenfoot.mouseClicked(null))
+            {
+                print(viewFax);
+                if(viewFax.isEmpty())
+                {
+                    gameWon();
+                }
+            }
+            if(fourth == false && Greenfoot.mouseClicked(null))
+            {
+                nextText("Run to...");
+                addButtons();
+                choice1.setValue("Stairwell");
+                choice2.setValue("Elevator");
+            }
+        }  
+        if(part == 5)
+        {
+            if(!runToStairwell.isEmpty() && fifth == true && Greenfoot.mouseClicked(null))
+                {
+                print(runToStairwell);
+                if(runToStairwell.isEmpty())
+                {
+                    gameWon();
+                }
+            }
+            if(!runToElevator.isEmpty() && fifth == false && Greenfoot.mouseClicked(null))
+            {
+                print(runToElevator);
+                if(runToElevator.isEmpty())
+                {
+                    gameLost();
                 }
             }
         }
