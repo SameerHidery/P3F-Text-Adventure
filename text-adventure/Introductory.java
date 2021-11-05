@@ -21,7 +21,7 @@ public class Introductory extends World
     Queue<String> callManager = new Queue<String>();
     Queue<String> runToStairwell = new Queue<String>();
     Queue<String> runToElevator = new Queue<String>();
-    Queue<String> storyQueue11 = new Queue<String>();
+    Queue<String> viewFax = new Queue<String>();
     
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
@@ -86,7 +86,7 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(callManager, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/2adfb135eb59f23352e15236993400b0bd7ec376/callManager");
+            Reader.readInto(callManager, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/59cba891b86546ff2d0a6ddf798033793e0b7066/callManager");
             } catch(Exception e) {
         }
         try{
@@ -94,9 +94,13 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(runToElevator, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/2adfb135eb59f23352e15236993400b0bd7ec376/callManager");
+            Reader.readInto(runToElevator, "https://gist.githubusercontent.com/SameerHidery/911d96469925c84c3a0a96221c4e499b/raw/1fad9731dff1b3a69fb562f8932858c30bcd9509/runToElevator");
             } catch(Exception e) {
         }
+        try{
+            Reader.readInto(viewFax, "https://gist.githubusercontent.com/SameerHidery/3e9159699cedd84e2d26fa1f9963d7bd/raw/1deca3ad58116459b66ca4c8d63f78bbf15bfe5c/ViewFax");
+            } catch(Exception e) {
+        }      
         
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
@@ -246,14 +250,6 @@ public class Introductory extends World
                 }
             }
         }
-
-
-        
-        
-
-
-        
-
     }
     public void gameLost()
     {
