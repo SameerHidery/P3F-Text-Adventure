@@ -29,6 +29,9 @@ public class Introductory extends World
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
     GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
     GreenfootSound elevator = new GreenfootSound("Elevator Sound.wav");
+    GreenfootSound announcementSystem = new GreenfootSound("PA Announcement Sound Effect.wav");
+    GreenfootSound siren = new GreenfootSound("Code Blue Alarm.wav");
+    GreenfootSound powerOn = new GreenfootSound("Search Spotlight Turn On Sound Effect.wav");
     
     //Create labels to chop up sentences. Shouldn't take more than 4 lines
     Label storyLabel1 = new Label("", 33);
@@ -118,6 +121,7 @@ public class Introductory extends World
         
         keyboard.setVolume(50);
         elevator.setVolume(20);
+        siren.setVolume(40);
     }
     public void act()
     {
@@ -213,9 +217,8 @@ public class Introductory extends World
          * The story continues from when the user chooses to put on headphones or not
          */
         if(part == 1){
-            setBackground(new GreenfootImage("Dark Theme.png"));
-            
             if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
+                mouseClicks++;
                 print(withHeadphones);
                 if(withHeadphones.isEmpty()){
                     addButtons();
@@ -225,30 +228,53 @@ public class Introductory extends World
             }
             if(!noHeadphones.isEmpty() && first == false && Greenfoot.mouseClicked(null)){
                 mouseClicks++;
-                if(mouseClicks == 1){
-                    powerDown.play();
-                }
                 if(mouseClicks == 2){
-                    powerDown.stop();
-                    keyboard.play();
                     TitleScreen.rainAndThunder.setVolume(30);
+                    keyboard.play();
                 }
-                TitleScreen.rainAndThunder.setVolume(40);
                 if(mouseClicks == 3){
+                    TitleScreen.rainAndThunder.setVolume(40);
                     keyboard.stop();
                     elevator.play();
+                }
+                if(mouseClicks == 4){
+                    elevator.stop();
+                    powerDown.play();
+                    setBackground(new GreenfootImage("Dark Theme.png"));
+                }
+                if(mouseClicks == 5){
+                    powerDown.stop();
+                    announcementSystem.play();
+                }
+                if(mouseClicks == 6){
+                    powerOn.play();
+                    setBackground(new GreenfootImage("Alarm Theme.png"));
+                }
+                if(mouseClicks == 7){
+                    powerOn.stop();
+                    siren.play();
                 }
                 print(noHeadphones);
                 if(noHeadphones.isEmpty()){
                     addButtons();
                     choice1.setValue("Turn it off");
                     choice2.setValue("Keep it on");        
+                    mouseClicks = 0;
                 }
             }
         }
         
+        if(part >= 2){
+            if(second == false){
+                siren.play();
+            }
+            else{
+                siren.stop();
+            }
+        }
         if(part == 2){
             if(!offLockdown.isEmpty() && second == true && Greenfoot.mouseClicked(null)){
+                siren.stop();
                 print(offLockdown);
                 if(offLockdown.isEmpty()){
                     addButtons();

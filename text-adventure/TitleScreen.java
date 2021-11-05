@@ -37,11 +37,11 @@ public class TitleScreen extends World
      */
     public void act()
     {
-        rainAndThunder.play();
         if(Greenfoot.mouseClicked(null))
         {
             Introductory gameWorld = new Introductory();
             Greenfoot.setWorld(gameWorld);
         }    
+        rainAndThunder.play();
     }
 }
