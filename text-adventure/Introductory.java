@@ -54,7 +54,7 @@ public class Introductory extends World
      */
     public Introductory()
     {    
-        // Create a new world with 1050x850 cells with a cell size of 1x1 pixels.
+        // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
  
         try{
@@ -78,11 +78,11 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(callGrandma, "https://gist.githubusercontent.com/SameerHidery/201137d60ce73adcccd664dc80a358c4/raw/77a5e8b0f4b05f71c5b2a010718222fdbb151e40/GrandmaCall");
+            Reader.readInto(callGrandma, "https://gist.githubusercontent.com/SameerHidery/201137d60ce73adcccd664dc80a358c4/raw/ba097080b2d1b59272d8343783d67997856a86f5/GrandmaCall");
             } catch(Exception e) {
         }
         try{
-            Reader.readInto(callMom, "https://gist.githubusercontent.com/SameerHidery/27fbaf4d077166f6712c91830904e125/raw/22dc0d3cf9d9b0dc596e0d80d3a3f13973cc1c06/callMom");
+            Reader.readInto(callMom, "https://gist.githubusercontent.com/SameerHidery/27fbaf4d077166f6712c91830904e125/raw/71306ad61b40fe637c563d9eccf2ed10dd9bc3d5/callMom");
             } catch(Exception e) {
         }
         try{
@@ -236,17 +236,25 @@ public class Introductory extends World
             {
                 print(callGrandma);
             }
-            if(callGrandma.isEmpty() || callMom.isEmpty()){
+            if(callMom.isEmpty() || callGrandma.isEmpty()){
                 gameLost();
             }
         }
+
+
+
         
 
     }
     public void gameLost()
     {
-        EndScreen end = new EndScreen();
-        Greenfoot.setWorld(end);
+        LostScreen lose = new LostScreen();
+        Greenfoot.setWorld(lose);
+    }
+    public void gameWon()
+    {
+        WinScreen win = new WinScreen();
+        Greenfoot.setWorld(win);
     }
     public void addButtons()
     {

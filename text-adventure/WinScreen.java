@@ -1,19 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EndScreen here.
+ * Write a description of class WinScreen here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class EndScreen extends World
+public class WinScreen extends World
 {
 
     /**
-     * Constructor for objects of class EndScreen.
+     * Constructor for objects of class WinScreen.
      * 
      */
-    public EndScreen()
+    public WinScreen()
     {    
         // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
