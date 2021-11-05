@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class handphone extends Actor
 {
-    GreenfootImage[] textphone = new GreenfootImage[3];
+    GreenfootImage[] textphone = new GreenfootImage[4];
     public static int screenDisplay = 0;
     
     static int[] playerPass = new int[4]; 
@@ -28,7 +28,7 @@ public class handphone extends Actor
         }
         setImage(textphone[0]);
         GreenfootImage image = getImage();
-        image.scale(image.getWidth() - 890, image.getHeight()-1600);
+        image.scale(356, 635);
         setImage(image);
         screenDisplay = 0;
         firstScrONE = true;
@@ -43,18 +43,12 @@ public class handphone extends Actor
     public void act() 
     {
         MyWorld world= (MyWorld) getWorld();
-        passIndex first = new passIndex();
-        passIndex second = new passIndex();
-        passIndex third = new passIndex();
-        passIndex fourth = new passIndex();
-            
-        
-       
+
         if (Greenfoot.mouseClicked(this) && screenDisplay == 0)
         {
             setImage(textphone[1]);
             GreenfootImage image = getImage();
-            image.scale(image.getWidth() - 890, image.getHeight()-1600);
+            image.scale(356, 635);
             setImage(image);
             world.keyPad();
             screenDisplay = 1;
@@ -64,40 +58,29 @@ public class handphone extends Actor
     
         if(screenDisplay == 1)
         {
-            if(numPass==0)
+            if(numPass == 1)
             {
-                world.addObject(first, 905, 215);
-                world.addObject(second, 935, 215);
-                world.addObject(third, 965, 215);
-                world.addObject(fourth, 995, 215);
-            }
-            else if(numPass == 1)
-            {
-                //switch
+                world.circle[0].entered();
             }
             else if(numPass == 2)
             {
-                //switch
+                world.circle[1].entered();
             }
             else if(numPass == 3)
             {
-                
-                //switch
+                world.circle[2].entered();
             }
             else if(numPass == 4)
             {
-
-                //switch
-                System.out.println("---");
+                world.circle[3].entered();
                 if((playerPass[0]== 4) && (playerPass[1] == 0) && (playerPass[2] == 4) && (playerPass[3] == 7 ))
                 {
-                    System.out.println("pass");
                     numPass= 0;
                     if(screenDisplay == 1)
                     {
                         setImage(textphone[2]);
                         GreenfootImage image = getImage();
-                        image.scale(image.getWidth() - 890, image.getHeight()-1600);
+                        image.scale(356, 635);
                         setImage(image);
                         world.keyPad();
                         screenDisplay = 2;
@@ -109,16 +92,21 @@ public class handphone extends Actor
                 }
                 else
                 {
-                   System.out.println("fail");
                    numPass= 0;
+                   world.circle[3].deleted();
+                   world.circle[2].deleted();
+                   world.circle[1].deleted();
+                   world.circle[0].deleted();
                    
-                   //switch back 
                 }
             }
         }
-        if(screenDisplay == 2)
+        if(screenDisplay == 3)
         {
-            //world.removeObject(one);
+            setImage(textphone[3]);
+            GreenfootImage image = getImage();
+            image.scale(356, 635);
+            setImage(image);
         }
        
     }

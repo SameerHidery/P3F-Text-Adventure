@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class passIndex extends Actor
 {
-    public boolean selected = false;
+    private GreenfootImage image;
+    public static boolean entered;
     public passIndex()
     {
         GreenfootImage image = getImage();
@@ -21,6 +22,18 @@ public class passIndex extends Actor
      */
     public void act() 
     {
-        // Add your action code here.
-    }    
+        //
+    } 
+    public void entered()
+    {
+        image = new GreenfootImage("fullcircle.png");
+        image.scale(15,15);
+        setImage(image);
+    }
+    public void deleted()
+    {
+        image = new GreenfootImage("numOFPASS.png");
+        image.scale(15,15);
+        setImage(image);
+    }
 }

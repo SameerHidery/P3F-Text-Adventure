@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World
 {
     ButtonKey[] keys = new ButtonKey[10];
+    passIndex[] circle = new passIndex[4];
     
     /**
      * Constructor for objects of class MyWorld.
@@ -25,15 +26,16 @@ public class MyWorld extends World
         
     }
     
-    public void keyPad()
+    public void run()
     {
         
-        deleteBut del = new deleteBut();
+    }
+    
+    public void keyPad()
+    {
         if(handphone.screenDisplay == 0)
         {
-            
-            addObject(del, 860, 615);
-            
+
             keys = new ButtonKey[10];
             for(int i = 0; i < 10; i++)
             {
@@ -50,18 +52,31 @@ public class MyWorld extends World
             addObject(keys[8], 950, 464);
             addObject(keys[9], 1045, 464);
             addObject(keys[0], 950, 561);
+            
+            circle = new passIndex[4];
+            for(int j =0; j < 4; j++)
+            {
+                circle[j]= new passIndex();
+            }
+            addObject(circle[0], 905, 215);
+            addObject(circle[1], 935, 215);
+            addObject(circle[2], 965, 215);
+            addObject(circle[3], 995, 215);
         }
         // Player got the password correct
         else if(handphone.screenDisplay==1)
         {  
-            removeObject(del);
             for(ButtonKey key : keys)
             {
                 removeObject(key);
             }
+            for(passIndex select : circle)
+            {
+                removeObject(select);
+            }
+            addObject(new PhoneApp(), 853, 627);
         }
-        
-        
+
     }
 
 
