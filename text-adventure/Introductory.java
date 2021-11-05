@@ -25,6 +25,11 @@ public class Introductory extends World
     
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
+    //Create sounds
+    GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
+    GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
+    GreenfootSound elevator = new GreenfootSound("Elevator Sound.wav");
+    
     //Create labels to chop up sentences. Shouldn't take more than 4 lines
     Label storyLabel1 = new Label("", 33);
     Label storyLabel2 = new Label("", 33);
@@ -48,6 +53,10 @@ public class Introductory extends World
     
     int x = 340;
     int y = 120;
+
+    int mouseClicks = 0;
+    
+    SimpleTimer t = new SimpleTimer(); 
     /**
      * Constructor for objects of class CopyOfIntroductory.
      * 
@@ -107,6 +116,8 @@ public class Introductory extends World
         addObject(storyLabel3, x, y + 60);
         addObject(storyLabel4, x, y + 90);
         
+        keyboard.setVolume(50);
+        elevator.setVolume(20);
     }
     public void act()
     {
@@ -202,6 +213,8 @@ public class Introductory extends World
          * The story continues from when the user chooses to put on headphones or not
          */
         if(part == 1){
+            setBackground(new GreenfootImage("Dark Theme.png"));
+            
             if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
                 print(withHeadphones);
                 if(withHeadphones.isEmpty()){
@@ -211,6 +224,20 @@ public class Introductory extends World
                 }
             }
             if(!noHeadphones.isEmpty() && first == false && Greenfoot.mouseClicked(null)){
+                mouseClicks++;
+                if(mouseClicks == 1){
+                    powerDown.play();
+                }
+                if(mouseClicks == 2){
+                    powerDown.stop();
+                    keyboard.play();
+                    TitleScreen.rainAndThunder.setVolume(30);
+                }
+                TitleScreen.rainAndThunder.setVolume(40);
+                if(mouseClicks == 3){
+                    keyboard.stop();
+                    elevator.play();
+                }
                 print(noHeadphones);
                 if(noHeadphones.isEmpty()){
                     addButtons();

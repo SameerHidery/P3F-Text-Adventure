@@ -10,9 +10,9 @@ public class TitleScreen extends World
 {
     //Create labels
     Label titleLabel = new Label("Late Night Office Hours", 65);
-    Label startGame = new Label("Click mouse to go next", 40);
+    public static Label instructions = new Label("Click left mouse button to continue", 40);
     //Adding rain sound effect
-    GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
+    public static GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
     /**
      * Constructor for objects of class TitleScren.
      * 
@@ -24,8 +24,10 @@ public class TitleScreen extends World
         
         // Adding the labels to the title screen
         addObject(titleLabel, 350, 200);
-        addObject(startGame, 350, 400);
+        addObject(instructions, 350, 400);
         
+        //setting the rain sound's volume
+        rainAndThunder.setVolume(40);
         
     }
     
@@ -35,8 +37,7 @@ public class TitleScreen extends World
      */
     public void act()
     {
-        rainAndThunder.setVolume(40);
-        //rainAndThunder.play();
+        rainAndThunder.play();
         if(Greenfoot.mouseClicked(null))
         {
             Introductory gameWorld = new Introductory();
