@@ -19,8 +19,8 @@ public class Introductory extends World
     Queue<String> callGrandma = new Queue<String>();
     Queue<String> callMom = new Queue<String>();
     Queue<String> callManager = new Queue<String>();
+    Queue<String> runToStairwell = new Queue<String>();
     Queue<String> runToElevator = new Queue<String>();
-    Queue<String> storyQueue10 = new Queue<String>();
     Queue<String> storyQueue11 = new Queue<String>();
     
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
@@ -34,6 +34,7 @@ public class Introductory extends World
     Button trueButton = new Button();
     Button falseButton = new Button();
     
+    
     Label choice1 = new Label(" ", 40);
     Label choice2 = new Label(" ", 40);
     
@@ -44,7 +45,6 @@ public class Introductory extends World
     boolean third;
     boolean fourth;
     boolean fifth;
-    boolean sixth;
     
     int x = 340;
     int y = 120;
@@ -87,6 +87,14 @@ public class Introductory extends World
         }
         try{
             Reader.readInto(callManager, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/2adfb135eb59f23352e15236993400b0bd7ec376/callManager");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(runToStairwell, "https://gist.githubusercontent.com/SameerHidery/f248d7f7370b88ff82de0a14b0bfafba/raw/d289df7c68bddc103ee6ad1a916308dfa37012c4/runToStairwell");
+            } catch(Exception e) {
+        }
+        try{
+            Reader.readInto(runToElevator, "https://gist.githubusercontent.com/SameerHidery/a88a3424d274cd5c4081d953bed64db7/raw/2adfb135eb59f23352e15236993400b0bd7ec376/callManager");
             } catch(Exception e) {
         }
         
@@ -142,12 +150,6 @@ public class Introductory extends World
                 fifth = decisions.get("five");
                 part++;
             }
-            else if(part == 5)
-            {
-                decisions.put("six", true);
-                sixth = decisions.get("six");
-                part++;
-            }
         }
         
         //Determines false if the right button was clicked for all the decisions and stores each in the hashmap 
@@ -178,12 +180,6 @@ public class Introductory extends World
             {
                 decisions.put("five", false);
                 fifth = decisions.get("five");
-                part++;
-            }
-            else if(part == 5)
-            {
-                decisions.put("six", false);
-                sixth = decisions.get("six");
                 part++;
             }
         }
@@ -240,7 +236,20 @@ public class Introductory extends World
                 gameLost();
             }
         }
+        if(part == 3 && second == false){
+            if(!callManager.isEmpty() && (third == true || third == false) && Greenfoot.mouseClicked(null)){
+                print(callManager);
+                if(callManager.isEmpty()){
+                    addButtons();
+                    choice1.setValue("View fax");
+                    choice2.setValue("Run to...");
+                }
+            }
+        }
 
+
+        
+        
 
 
         
