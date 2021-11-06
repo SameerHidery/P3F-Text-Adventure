@@ -1,15 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 /**
- * The first scenario (introductory chapter) of the story game will be in this world
+ * The world the story of the game will be in
  * 
- * @author Sameer Hidery
+ * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  * @version 1.1
  */
-public class Introductory extends World
+public class StoryGame extends World
 {
     Queue<String> introductory = new Queue<String>();
     Queue<String> withHeadphones = new Queue<String>();
@@ -27,7 +26,7 @@ public class Introductory extends World
     
     //Create labels
     Label titleLabel = new Label("Late Night Office Hours", 55);
-    Label instructions = new Label("Click left mouse button to continue", 35);
+    public static Label instructions = new Label("Click left mouse button to continue", 35);
     
     //Create sounds
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
@@ -62,6 +61,7 @@ public class Introductory extends World
     boolean third;
     boolean fourth;
     boolean fifth;
+    boolean sixth;
     
     int x = 340;
     int y = 120;
@@ -72,7 +72,7 @@ public class Introductory extends World
      * Constructor for objects of class CopyOfIntroductory.
      * 
      */
-    public Introductory()
+    public StoryGame()
     {    
         // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
@@ -122,6 +122,9 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         
+        instructions.setLineColor(Color.BLACK);
+        instructions.setFillColor(Color.BLACK);
+        
         addObject(titleLabel, 350, 200);
         addObject(instructions, 350, 400);
         
@@ -161,76 +164,12 @@ public class Introductory extends World
         
         if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
             removeButtons();
-            if(part == 0){
-                decisions.put("one", true);
-                first = decisions.get("one");
-                part++;
-            }
-            else if(part == 1){
-                decisions.put("two", true);
-                second = decisions.get("two");
-                part++;
-            }
-            else if(part == 2)
-            {
-                decisions.put("three", true);
-                third = decisions.get("three");
-                part++;
-            }
-            else if(part == 3)
-            {
-                decisions.put("four", true);
-                fourth = decisions.get("four");
-                part++;
-            }
-            else if(part == 4)
-            {
-                decisions.put("five", true);
-                fifth = decisions.get("five");
-                part++;
-            }
-            else if(part == 5)
-            {
-                decisions.put("six", true);
-                fifth = decisions.get("six");
-            }
+            trueButtonValues();
         }
         
         if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
             removeButtons();
-            if(part == 0){
-                decisions.put("one", false);
-                first = decisions.get("one");
-                part++;
-            }
-            else if(part == 1){
-                decisions.put("two", false);
-                second = decisions.get("two");
-                part++;
-            }
-            else if(part == 2){
-                decisions.put("three", false);
-                third = decisions.get("three");
-                part++;
-            }
-            else if(part == 3)
-            {
-                decisions.put("four", false);
-                fourth = decisions.get("four");
-                part++;
-            }
-            else if(part == 4)
-            {
-                decisions.put("five", false);
-                fifth = decisions.get("five");
-                part++;
-            }
-            else if(part == 5)
-            {
-                decisions.put("six", false);
-                fifth = decisions.get("six");
-            }
-            
+            falseButtonValues();
         }
         /**
          * The story continues after the put on headphones choice
@@ -250,13 +189,14 @@ public class Introductory extends World
                 if(mouseClicks == 6){
                     heartBeat.stop();
                     powerDown.play();
+                    ghostlySigh.play();
                     powerDown.setVolume(50);
                     setBackground(new GreenfootImage("Dark Theme.png"));
                     rainAndThunder.setVolume(30);
                 }
                 if(mouseClicks == 7){
                     powerDown.stop();
-                    ghostlySigh.play();
+                    ghostlySigh.stop();
                 }
                 if(mouseClicks == 8){
                     setBackground(new GreenfootImage("Alarm Theme.png"));
@@ -488,6 +428,61 @@ public class Introductory extends World
         removeObject(falseButton);
         removeObject(choice1);
         removeObject(choice2);
+    }
+    public void trueButtonValues(){
+        if(part == 0){
+            decisions.put("one", true);
+            first = decisions.get("one");
+        }
+        else if(part == 1){
+            decisions.put("two", true);
+            second = decisions.get("two");
+        }
+        else if(part == 2){
+            decisions.put("three", true);
+            third = decisions.get("three");
+        }
+        else if(part == 3){
+            decisions.put("four", true);
+            fourth = decisions.get("four");
+        }
+        else if(part == 4){
+            decisions.put("five", true);
+            fifth = decisions.get("five");
+        }
+        else if(part == 5){
+            decisions.put("six", true);
+            sixth = decisions.get("six");
+        }
+        part++;
+    }
+    public void falseButtonValues(){
+        if(part == 0){
+            decisions.put("one", false);
+            first = decisions.get("one");
+        }
+        else if(part == 1){
+            decisions.put("two", false);
+            second = decisions.get("two");
+        }
+        else if(part == 2){
+            decisions.put("three", false);
+            third = decisions.get("three");
+        }
+        else if(part == 3){
+            decisions.put("four", false);
+            fourth = decisions.get("four");
+        }
+        else if(part == 4){
+            decisions.put("five", false);
+            fifth = decisions.get("five");
+        }
+        else if(part == 5)
+        {
+            decisions.put("six", false);
+            sixth = decisions.get("six");
+        }
+        part++;
     }
     public void print(Queue<String> q)
     {
