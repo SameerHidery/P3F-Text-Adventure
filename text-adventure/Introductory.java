@@ -35,7 +35,11 @@ public class Introductory extends World
     GreenfootSound heartBeat = new GreenfootSound("Heart Beat.wav");
     GreenfootSound ghostlySigh = new GreenfootSound("Ghost Sound - Sigh.wav");
     GreenfootSound rattleDoorHandle = new GreenfootSound("DOOR HANDLE SHAKE (HD SOUND EFFECT).wav");
-    //Create labels to chop up sentences. Shouldn't take more than 4 lines
+    GreenfootSound staticNoise = new GreenfootSound("TV static noise HD 1080p.wav");    
+    GreenfootSound creepySuspense = new GreenfootSound("Cinematic Suspense Riser - Sound Effect (HD).wav");
+    GreenfootSound lightFlickers = new GreenfootSound("Light Flicker Sound Effect.wav");
+    
+    
     Label storyLabel1 = new Label("", 33);
     Label storyLabel2 = new Label("", 33);
     Label storyLabel3 = new Label("", 33);
@@ -43,7 +47,6 @@ public class Introductory extends World
     
     Button trueButton = new Button();
     Button falseButton = new Button();
-    
     
     Label choice1 = new Label(" ", 40);
     Label choice2 = new Label(" ", 40);
@@ -61,7 +64,6 @@ public class Introductory extends World
     
     int mouseClicks = 0;
     
-    SimpleTimer t = new SimpleTimer(); 
     /**
      * Constructor for objects of class CopyOfIntroductory.
      * 
@@ -123,9 +125,12 @@ public class Introductory extends World
         
         keyboard.setVolume(50);
         elevator.setVolume(20);
-        siren.setVolume(40);
+        siren.setVolume(30);
         heartBeat.setVolume(30);
-        ghostlySigh.setVolume(50);
+        ghostlySigh.setVolume(40);
+        rattleDoorHandle.setVolume(50);
+        creepySuspense.setVolume(30);
+        staticNoise.setVolume(25);
     }
     public void act()
     {
@@ -142,7 +147,6 @@ public class Introductory extends World
             }
         }
         
-        //if the left choice is clicked
         if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
             removeButtons();
             if(part == 0){
@@ -180,7 +184,6 @@ public class Introductory extends World
             }
         }
         
-        //Determines false if the right button was clicked for all the decisions and stores each in the hashmap 
         if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
             removeButtons();
             if(part == 0){
@@ -218,7 +221,7 @@ public class Introductory extends World
             
         }
         /**
-         * The story continues from when the user chooses to put on headphones or not
+         * The story continues after the put on headphones choice
          */
         if(part == 1){
             if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
@@ -245,10 +248,10 @@ public class Introductory extends World
                 }
                 if(mouseClicks == 8){
                     setBackground(new GreenfootImage("Alarm Theme.png"));
-                    siren.setVolume(25);
+                    siren.setVolume(20);
                 }
                 if(mouseClicks == 10){
-                    siren.setVolume(40);
+                    siren.setVolume(30);
                 }
                 if(mouseClicks == 11){
                     rattleDoorHandle.play();
@@ -261,6 +264,7 @@ public class Introductory extends World
                     addButtons();
                     choice1.setValue("Turn it off");
                     choice2.setValue("Keep it on");
+                    mouseClicks = 0;
                 }
             }
             if(!noHeadphones.isEmpty() && first == false && Greenfoot.mouseClicked(null)){
@@ -295,12 +299,13 @@ public class Introductory extends World
                 if(noHeadphones.isEmpty()){
                     addButtons();
                     choice1.setValue("Turn it off");
-                    choice2.setValue("Keep it on");        
+                    choice2.setValue("Keep it on"); 
                     mouseClicks = 0;
                 }
             }
         }
         
+        //make the siren keep playing unless player decided to turn it off
         if(part >= 2){
             if(second == false){
                 siren.play();
@@ -309,45 +314,88 @@ public class Introductory extends World
                 siren.stop();
             }
         }
+        
         if(part == 2){
             if(!offLockdown.isEmpty() && second == true && Greenfoot.mouseClicked(null)){
-                siren.stop();
+                mouseClicks++;
+                if(mouseClicks == 2)
+                {
+                    setBackground(new GreenfootImage("Light Theme.png"));
+                    powerOn.play();
+                }
                 print(offLockdown);
                 if(offLockdown.isEmpty()){
                     addButtons();
                     choice1.setValue("Mother");
                     choice2.setValue("Grandma");
+                    mouseClicks = 0;
                 }
             }
             if(!onLockdown.isEmpty() && second == false && Greenfoot.mouseClicked(null)){
+                mouseClicks++;
+                if(mouseClicks == 3 || mouseClicks == 4){
+                    staticNoise.play();
+                }
+                if(mouseClicks == 5){
+                    staticNoise.stop();
+                }
+                if(mouseClicks == 7){
+                    lightFlickers.play();
+                    setBackground(new GreenfootImage("Dark Theme.png"));
+                }
+                if(mouseClicks == 8){
+                    lightFlickers.stop();
+                }
                 print(onLockdown);
                 if(onLockdown.isEmpty()){
                     addButtons();
                     choice1.setValue("Yell at him");
                     choice2.setValue("Complain");
+                    mouseClicks = 0;
                 }
             }
         }
         if(part == 3 && second == true){
             if(!callMom.isEmpty() && third == true && Greenfoot.mouseClicked(null))
             {
+                mouseClicks++;
+                if(mouseClicks == 2){
+                    staticNoise.play();
+                }
+                if(mouseClicks == 3){
+                    staticNoise.setVolume(40);
+                }
                 print(callMom);
             }
             if(!callGrandma.isEmpty() && third == false && Greenfoot.mouseClicked(null))
             {
+                mouseClicks++;
+                if(mouseClicks == 9){
+                    creepySuspense.play();
+                }
                 print(callGrandma);
             }
             if(callMom.isEmpty() || callGrandma.isEmpty()){
+                staticNoise.stop();
                 gameLost();
+                mouseClicks = 0;
             }
         }
         if(part == 3 && second == false){
             if(!callManager.isEmpty() && (third == true || third == false) && Greenfoot.mouseClicked(null)){
+                mouseClicks++;
+                if(mouseClicks == 9){
+                    staticNoise.play();
+                }
+                if(mouseClicks == 10){
+                    staticNoise.stop();
+                }
                 print(callManager);
                 if(callManager.isEmpty()){
                     addButtons();
                     choice1.setValue("View fax");
                     choice2.setValue("Run to...");
+                    mouseClicks = 0;
                 }
             }
         }
@@ -372,15 +420,31 @@ public class Introductory extends World
         if(part == 5)
         {
             if(!runToStairwell.isEmpty() && fifth == true && Greenfoot.mouseClicked(null))
-                {
+            {
+                mouseClicks++;
+                if(mouseClicks == 2){
+                    rattleDoorHandle.play();
+                }
+                if(mouseClicks == 10){
+                    siren.setVolume(15);
+                }
                 print(runToStairwell);
                 if(runToStairwell.isEmpty())
                 {
                     gameWon();
+                    mouseClicks = 0;
                 }
             }
             if(!runToElevator.isEmpty() && fifth == false && Greenfoot.mouseClicked(null))
             {
+                mouseClicks++;
+                if(mouseClicks == 3){
+                    setBackground(new GreenfootImage("Light Theme.png"));
+                    second = true;
+                }
+                if(mouseClicks == 7){
+                    creepySuspense.play();
+                }
                 print(runToElevator);
                 if(runToElevator.isEmpty())
                 {
