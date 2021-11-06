@@ -25,6 +25,10 @@ public class Introductory extends World
     
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
+    //Create labels
+    Label titleLabel = new Label("Late Night Office Hours", 55);
+    Label instructions = new Label("Click left mouse button to continue", 35);
+    
     //Create sounds
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
     GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
@@ -38,7 +42,7 @@ public class Introductory extends World
     GreenfootSound staticNoise = new GreenfootSound("TV static noise HD 1080p.wav");    
     GreenfootSound creepySuspense = new GreenfootSound("Cinematic Suspense Riser - Sound Effect (HD).wav");
     GreenfootSound lightFlickers = new GreenfootSound("Light Flicker Sound Effect.wav");
-    
+    GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
     
     Label storyLabel1 = new Label("", 33);
     Label storyLabel2 = new Label("", 33);
@@ -118,11 +122,16 @@ public class Introductory extends World
             } catch(Exception e) {
         }
         
+        addObject(titleLabel, 350, 200);
+        addObject(instructions, 350, 400);
+        
+        
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
         addObject(storyLabel3, x, y + 60);
         addObject(storyLabel4, x, y + 90);
         
+        rainAndThunder.setVolume(40);
         keyboard.setVolume(50);
         elevator.setVolume(20);
         siren.setVolume(30);
@@ -134,11 +143,14 @@ public class Introductory extends World
     }
     public void act()
     {
+        rainAndThunder.play();
         /**
          * First part of story with first decision for the user
          */
         if(Greenfoot.mouseClicked(null) && !introductory.isEmpty())
         {
+            removeObject(titleLabel);
+            removeObject(instructions);
             print(introductory);
             if(introductory.isEmpty()){
                 addButtons();
@@ -227,10 +239,10 @@ public class Introductory extends World
             if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
                 mouseClicks++;
                 if(mouseClicks == 1){
-                    TitleScreen.rainAndThunder.setVolume(30);
+                    rainAndThunder.setVolume(30);
                 }
                 if(mouseClicks == 2){
-                    TitleScreen.rainAndThunder.setVolume(40);
+                    rainAndThunder.setVolume(40);
                 }
                 if(mouseClicks == 5){
                     heartBeat.play();
@@ -240,7 +252,7 @@ public class Introductory extends World
                     powerDown.play();
                     powerDown.setVolume(50);
                     setBackground(new GreenfootImage("Dark Theme.png"));
-                    TitleScreen.rainAndThunder.setVolume(30);
+                    rainAndThunder.setVolume(30);
                 }
                 if(mouseClicks == 7){
                     powerDown.stop();
@@ -270,11 +282,11 @@ public class Introductory extends World
             if(!noHeadphones.isEmpty() && first == false && Greenfoot.mouseClicked(null)){
                 mouseClicks++;
                 if(mouseClicks == 2){
-                    TitleScreen.rainAndThunder.setVolume(30);
+                    rainAndThunder.setVolume(30);
                     keyboard.play();
                 }
                 if(mouseClicks == 3){
-                    TitleScreen.rainAndThunder.setVolume(40);
+                    rainAndThunder.setVolume(40);
                     keyboard.stop();
                     elevator.play();
                 }
