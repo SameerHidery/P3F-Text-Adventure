@@ -32,7 +32,9 @@ public class Introductory extends World
     GreenfootSound announcementSystem = new GreenfootSound("PA Announcement Sound Effect.wav");
     GreenfootSound siren = new GreenfootSound("Code Blue Alarm.wav");
     GreenfootSound powerOn = new GreenfootSound("Search Spotlight Turn On Sound Effect.wav");
-    
+    GreenfootSound heartBeat = new GreenfootSound("Heart Beat.wav");
+    GreenfootSound ghostlySigh = new GreenfootSound("Ghost Sound - Sigh.wav");
+    GreenfootSound rattleDoorHandle = new GreenfootSound("DOOR HANDLE SHAKE (HD SOUND EFFECT).wav");
     //Create labels to chop up sentences. Shouldn't take more than 4 lines
     Label storyLabel1 = new Label("", 33);
     Label storyLabel2 = new Label("", 33);
@@ -56,7 +58,7 @@ public class Introductory extends World
     
     int x = 340;
     int y = 120;
-
+    
     int mouseClicks = 0;
     
     SimpleTimer t = new SimpleTimer(); 
@@ -122,6 +124,8 @@ public class Introductory extends World
         keyboard.setVolume(50);
         elevator.setVolume(20);
         siren.setVolume(40);
+        heartBeat.setVolume(30);
+        ghostlySigh.setVolume(50);
     }
     public void act()
     {
@@ -219,6 +223,39 @@ public class Introductory extends World
         if(part == 1){
             if(!withHeadphones.isEmpty() && first == true && Greenfoot.mouseClicked(null)){
                 mouseClicks++;
+                if(mouseClicks == 1){
+                    TitleScreen.rainAndThunder.setVolume(30);
+                }
+                if(mouseClicks == 2){
+                    TitleScreen.rainAndThunder.setVolume(40);
+                }
+                if(mouseClicks == 5){
+                    heartBeat.play();
+                }
+                if(mouseClicks == 6){
+                    heartBeat.stop();
+                    powerDown.play();
+                    powerDown.setVolume(50);
+                    setBackground(new GreenfootImage("Dark Theme.png"));
+                    TitleScreen.rainAndThunder.setVolume(30);
+                }
+                if(mouseClicks == 7){
+                    powerDown.stop();
+                    ghostlySigh.play();
+                }
+                if(mouseClicks == 8){
+                    setBackground(new GreenfootImage("Alarm Theme.png"));
+                    siren.setVolume(25);
+                }
+                if(mouseClicks == 10){
+                    siren.setVolume(40);
+                }
+                if(mouseClicks == 11){
+                    rattleDoorHandle.play();
+                }
+                if(mouseClicks >= 8){
+                    siren.play();
+                }
                 print(withHeadphones);
                 if(withHeadphones.isEmpty()){
                     addButtons();

@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class TitleScreen extends World
 {
     //Create labels
-    Label titleLabel = new Label("Late Night Office Hours", 65);
-    public static Label instructions = new Label("Click left mouse button to continue", 40);
+    Label titleLabel = new Label("Late Night Office Hours", 55);
+    public static Label instructions = new Label("Click left mouse button to continue", 35);
     //Adding rain sound effect
     public static GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
     /**
