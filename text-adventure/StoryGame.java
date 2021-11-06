@@ -24,11 +24,20 @@ public class StoryGame extends World
     
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
-    //Create labels
+    Button trueButton = new Button();
+    Button falseButton = new Button();
+    
     Label titleLabel = new Label("Late Night Office Hours", 55);
     public static Label instructions = new Label("Click left mouse button to continue", 35);
+
+    Label storyLabel1 = new Label("", 33);
+    Label storyLabel2 = new Label("", 33);
+    Label storyLabel3 = new Label("", 33);
+    Label storyLabel4 = new Label("", 33);
     
-    //Create sounds
+    Label choice1 = new Label(" ", 40);
+    Label choice2 = new Label(" ", 40);
+    
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
     GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
     GreenfootSound elevator = new GreenfootSound("Elevator Sound.wav");
@@ -42,17 +51,7 @@ public class StoryGame extends World
     GreenfootSound creepySuspense = new GreenfootSound("Cinematic Suspense Riser - Sound Effect (HD).wav");
     GreenfootSound lightFlickers = new GreenfootSound("Light Flicker Sound Effect.wav");
     GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
-    
-    Label storyLabel1 = new Label("", 33);
-    Label storyLabel2 = new Label("", 33);
-    Label storyLabel3 = new Label("", 33);
-    Label storyLabel4 = new Label("", 33);
-    
-    Button trueButton = new Button();
-    Button falseButton = new Button();
-    
-    Label choice1 = new Label(" ", 40);
-    Label choice2 = new Label(" ", 40);
+    GreenfootSound phoneDial = new GreenfootSound("Phone Dialing SFX  [Sound Effect].wav");
     
     int part = 0;
     
@@ -147,6 +146,26 @@ public class StoryGame extends World
     public void act()
     {
         rainAndThunder.play();
+        
+        if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
+            removeButtons();
+            trueButtonValues();
+        }
+        
+        if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
+            removeButtons();
+            falseButtonValues();
+        }
+        
+        if(part >= 2){
+            if(second == false){
+                siren.play();
+            }
+            else{
+                siren.stop();
+            }
+        }
+        
         if(Greenfoot.mouseClicked(null)){
             if(part == 0){
                 if(!introductory.isEmpty()){
@@ -262,7 +281,11 @@ public class StoryGame extends World
                 }
                 if(!onLockdown.isEmpty() && second == false){
                     mouseClicks++;
-                    if(mouseClicks == 3 || mouseClicks == 4){
+                    if(mouseClicks == 2){
+                        phoneDial.play();
+                    }
+                    if(mouseClicks == 3){
+                        phoneDial.stop();
                         staticNoise.play();
                     }
                     if(mouseClicks == 5){
@@ -275,6 +298,9 @@ public class StoryGame extends World
                     if(mouseClicks == 8){
                         lightFlickers.stop();
                     }
+                    if(mouseClicks == 9){
+                        phoneDial.play();
+                    }
                     print(onLockdown);
                     if(onLockdown.isEmpty()){
                         addButtons();
@@ -286,10 +312,14 @@ public class StoryGame extends World
             }
             
             if(part == 3){
+                phoneDial.stop();
                 if(second == true){
                     if(!callMom.isEmpty() && third == true)
                     {
                         mouseClicks++;
+                        if(mouseClicks == 1){
+                            phoneDial.play();
+                        }
                         if(mouseClicks == 2){
                             staticNoise.play();
                         }
@@ -301,6 +331,12 @@ public class StoryGame extends World
                     if(!callGrandma.isEmpty() && third == false)
                     {
                         mouseClicks++;
+                        if(mouseClicks == 2){
+                            phoneDial.play();
+                        }
+                        if(mouseClicks == 4){
+                            phoneDial.stop();
+                        }
                         if(mouseClicks == 9){
                             creepySuspense.play();
                         }
@@ -313,7 +349,7 @@ public class StoryGame extends World
                     }
                 }
                 if(second == false){
-                    if(!callManager.isEmpty() && (third == true || third == false) && Greenfoot.mouseClicked(null)){
+                    if(!callManager.isEmpty() && (third == true || third == false)){
                         mouseClicks++;
                         if(mouseClicks == 9){
                             staticNoise.play();
@@ -349,7 +385,7 @@ public class StoryGame extends World
             }
             
             if(part == 5){
-                if(!runToStairwell.isEmpty() && fifth == true && Greenfoot.mouseClicked(null))
+                if(!runToStairwell.isEmpty() && fifth == true)
                 {
                     mouseClicks++;
                     if(mouseClicks == 2){
@@ -365,7 +401,7 @@ public class StoryGame extends World
                         mouseClicks = 0;
                     }
                 }
-                if(!runToElevator.isEmpty() && fifth == false && Greenfoot.mouseClicked(null))
+                if(!runToElevator.isEmpty() && fifth == false)
                 {
                     mouseClicks++;
                     if(mouseClicks == 3){
@@ -383,32 +419,11 @@ public class StoryGame extends World
                 }
             }
         }
-        
-        if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
-            removeButtons();
-            trueButtonValues();
-        }
-        
-        if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
-            removeButtons();
-            falseButtonValues();
-        }
-        
-        //make the siren keep playing unless player decided to turn it off
-        if(part >= 2){
-            if(second == false){
-                siren.play();
-            }
-            else{
-                siren.stop();
-            }
-        }
     }
     
     public void gameLost(){
         LostScreen lose = new LostScreen();
         Greenfoot.setWorld(lose);
-
     }
     
     public void gameWon(){
@@ -486,11 +501,6 @@ public class StoryGame extends World
         part++;
     }
     
-    public void print(Queue<String> q){
-        String sentence = q.dequeue();
-        nextText(sentence);
-    }
-    
     public void nextText(String str){
         if(str.length() > 41 && str.length() < 83){
             int line1 = str.lastIndexOf(" ", 41);
@@ -534,6 +544,11 @@ public class StoryGame extends World
             storyLabel3.setValue(" ");
             storyLabel4.setValue(" ");
         }
+    }
+    
+        public void print(Queue<String> q){
+        String sentence = q.dequeue();
+        nextText(sentence);
     }
 }
 
