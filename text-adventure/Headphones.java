@@ -15,7 +15,7 @@ public class Headphones extends World
      */
     public Headphones()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
         
         addObject(headphones, 640, 150);
@@ -26,9 +26,10 @@ public class Headphones extends World
         
         StoryGame.instructions.setLineColor(Color.WHITE);
         StoryGame.instructions.setFillColor(Color.WHITE);
-        
     }
+    
     public void act(){
+        Greenfoot.setSpeed(70);
         if(Greenfoot.mouseClicked(null)){
             StoryGame game = new StoryGame();
             Greenfoot.setWorld(game);
