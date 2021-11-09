@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Reader
 {
-
+    //Each URL is loaded into their designated queues(data structure) 
     public static void readInto(Queue<String> q, String url) throws Exception {
         URL wordsURL = new URL(url);
         BufferedReader in = new BufferedReader(
