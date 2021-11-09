@@ -38,6 +38,12 @@ public class StoryGame extends World
     Label choice1 = new Label(" ", 40);
     Label choice2 = new Label(" ", 40);
     
+    LampOn lamp = new LampOn();
+    LampOff offLamp = new LampOff();
+    
+    NormalPicture picture = new NormalPicture();
+    CreepyPicture creepyPicture = new CreepyPicture();
+    
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
     GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
     GreenfootSound elevator = new GreenfootSound("Elevator Sound.wav");
@@ -54,7 +60,7 @@ public class StoryGame extends World
     GreenfootSound phoneDial = new GreenfootSound("Phone Dialing SFX  [Sound Effect].wav");
     
     int part = 0;
-    
+
     boolean first;
     boolean second;
     boolean third;
@@ -75,7 +81,7 @@ public class StoryGame extends World
     {    
         // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
- 
+
         try{
             Reader.readInto(introductory, "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/00be957644600fc11c624fc5e154ed22b62604f4/IntroductoryChapter.txt");
             } catch(Exception e) {
@@ -127,11 +133,13 @@ public class StoryGame extends World
         addObject(titleLabel, 350, 200);
         addObject(instructions, 350, 400);
         
-        
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
         addObject(storyLabel3, x, y + 60);
         addObject(storyLabel4, x, y + 90);
+        
+        addObject(picture, 980, 510);
+        addObject(lamp, 1150, 450);
         
         rainAndThunder.setVolume(40);
         keyboard.setVolume(50);
@@ -145,6 +153,7 @@ public class StoryGame extends World
     }
     public void act()
     {
+        Greenfoot.setSpeed(50);
         rainAndThunder.play();
         
         if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
@@ -156,7 +165,7 @@ public class StoryGame extends World
             removeButtons();
             falseButtonValues();
         }
-        
+
         if(part >= 2){
             if(second == false){
                 siren.play();
@@ -292,6 +301,8 @@ public class StoryGame extends World
                         staticNoise.stop();
                     }
                     if(mouseClicks == 7){
+                        removeObject(lamp);
+                        addObject(offLamp, 1150, 450);
                         lightFlickers.play();
                         setBackground(new GreenfootImage("Dark Theme.png"));
                     }
@@ -328,8 +339,7 @@ public class StoryGame extends World
                         }
                         print(callMom);
                     }
-                    if(!callGrandma.isEmpty() && third == false)
-                    {
+                    if(!callGrandma.isEmpty() && third == false){
                         mouseClicks++;
                         if(mouseClicks == 2){
                             phoneDial.play();
@@ -351,6 +361,9 @@ public class StoryGame extends World
                 if(second == false){
                     if(!callManager.isEmpty() && (third == true || third == false)){
                         mouseClicks++;
+                        if(mouseClicks == 8){
+                            pictureChange();
+                        }
                         if(mouseClicks == 9){
                             staticNoise.play();
                         }
@@ -371,8 +384,7 @@ public class StoryGame extends World
             if(part == 4){
                 if(!viewFax.isEmpty() && fourth == true){
                     print(viewFax);
-                    if(viewFax.isEmpty())
-                    {
+                    if(viewFax.isEmpty()){
                         gameWon();
                     }
                 }
@@ -385,8 +397,7 @@ public class StoryGame extends World
             }
             
             if(part == 5){
-                if(!runToStairwell.isEmpty() && fifth == true)
-                {
+                if(!runToStairwell.isEmpty() && fifth == true){
                     mouseClicks++;
                     if(mouseClicks == 2){
                         rattleDoorHandle.play();
@@ -395,14 +406,12 @@ public class StoryGame extends World
                         siren.setVolume(15);
                     }
                     print(runToStairwell);
-                    if(runToStairwell.isEmpty())
-                    {
+                    if(runToStairwell.isEmpty()){
                         gameWon();
                         mouseClicks = 0;
                     }
                 }
-                if(!runToElevator.isEmpty() && fifth == false)
-                {
+                if(!runToElevator.isEmpty() && fifth == false){
                     mouseClicks++;
                     if(mouseClicks == 3){
                         setBackground(new GreenfootImage("Light Theme.png"));
@@ -412,13 +421,17 @@ public class StoryGame extends World
                         creepySuspense.play();
                     }
                     print(runToElevator);
-                    if(runToElevator.isEmpty())
-                    {
+                    if(runToElevator.isEmpty()){
                         gameLost();
                     }
                 }
             }
         }
+    }
+    
+    public void pictureChange(){
+        addObject(creepyPicture, picture.getX(), picture.getY());
+        removeObject(picture);
     }
     
     public void gameLost(){
