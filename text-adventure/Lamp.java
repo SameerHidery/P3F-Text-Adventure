@@ -16,4 +16,5 @@ public class Lamp extends Actor
     {
         // Add your action code here.
     }
+
 }

@@ -165,7 +165,7 @@ public class StoryGame extends World
             removeButtons();
             falseButtonValues();
         }
-        
+
         if(part >= 2){
             if(second == false){
                 siren.play();
@@ -301,7 +301,8 @@ public class StoryGame extends World
                         staticNoise.stop();
                     }
                     if(mouseClicks == 7){
-                        lampFlickering();
+                        removeObject(lamp);
+                        addObject(offLamp, 1150, 450);
                         lightFlickers.play();
                         setBackground(new GreenfootImage("Dark Theme.png"));
                     }
@@ -426,13 +427,6 @@ public class StoryGame extends World
                 }
             }
         }
-    }
-    
-    public void lampFlickering(){
-        addObject(offLamp, lamp.getX(), lamp.getY());
-        removeObject(lamp);
-        addObject(lamp, offLamp.getX(), offLamp.getY());
-        removeObject(offLamp);
     }
     
     public void pictureChange(){

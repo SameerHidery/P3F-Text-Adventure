@@ -29,7 +29,7 @@ public class Headphones extends World
     }
     
     public void act(){
-        Greenfoot.setSpeed(70);
+        Greenfoot.setSpeed(100);
         if(Greenfoot.mouseClicked(null)){
             StoryGame game = new StoryGame();
             Greenfoot.setWorld(game);
