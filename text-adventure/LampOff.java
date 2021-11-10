@@ -1,25 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Button used
+ * Lamp with bulb off
  * 
  * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  */
-public class Button extends Actor
+public class LampOff extends Actor
 {
-    //Sets button's size
-    public Button(){
-        getImage().scale(200, 100);
-    }
-    
     /**
-     * Act - do whatever the Button wants to do. This method is called whenever
+     * Act - do whatever the LampOff wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
     public void act()
     {
-        
+        // Add your action code here.
     }
-    
 }

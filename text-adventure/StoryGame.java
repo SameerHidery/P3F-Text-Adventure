@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.net.*;
+import java.net.*; // 
 import java.io.*;
 import java.util.*;
 /**
- * The world the story of the game will be in
+ * The world the game is in
  * 
  * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
- * @version 1.1
  */
 public class StoryGame extends World
 {
+    //Creates queues of strings to hold texts of the story
     Queue<String> introductory = new Queue<String>();
     Queue<String> withHeadphones = new Queue<String>();
     Queue<String> noHeadphones = new Queue<String>();
@@ -22,22 +22,36 @@ public class StoryGame extends World
     Queue<String> runToElevator = new Queue<String>();
     Queue<String> viewFax = new Queue<String>();
     
+    //Creates hashmap to later determine the decisions and store their values
     HashMap<String, Boolean> decisions = new HashMap<String, Boolean>();
     
+    //Creates buttons
     Button trueButton = new Button();
     Button falseButton = new Button();
     
+    //Creates the title and the instruction labels
     Label titleLabel = new Label("Late Night Office Hours", 55);
     public static Label instructions = new Label("Click left mouse button to continue", 35);
-
+    
+    //Creates the story labels 
     Label storyLabel1 = new Label("", 33);
     Label storyLabel2 = new Label("", 33);
     Label storyLabel3 = new Label("", 33);
     Label storyLabel4 = new Label("", 33);
     
+    //Creates the labels for the choices
     Label choice1 = new Label(" ", 40);
     Label choice2 = new Label(" ", 40);
     
+    //Creates a lamp that's on and that's off
+    LampOn lamp = new LampOn();
+    LampOff offLamp = new LampOff();
+    
+    //Creates a normal picture frame and a creepy picture frame
+    NormalPicture picture = new NormalPicture();
+    CreepyPicture creepyPicture = new CreepyPicture();
+    
+    //Initializes the sounds
     GreenfootSound keyboard = new GreenfootSound("Keyboard, typing sound effect.wav"); 
     GreenfootSound powerDown = new GreenfootSound("Power Down Sound effect.wav"); 
     GreenfootSound elevator = new GreenfootSound("Elevator Sound.wav");
@@ -53,8 +67,10 @@ public class StoryGame extends World
     GreenfootSound rainAndThunder = new GreenfootSound("Sound Effect - 'Rain & Thunder'.wav");
     GreenfootSound phoneDial = new GreenfootSound("Phone Dialing SFX  [Sound Effect].wav");
     
+    //Initialize a variable to keep track of the parts of the story
     int part = 0;
-    
+
+    //Initialize boolean variables for each decision in the game
     boolean first;
     boolean second;
     boolean third;
@@ -62,9 +78,11 @@ public class StoryGame extends World
     boolean fifth;
     boolean sixth;
     
+    //Initializes an x and y variable for the location for the story labels
     int x = 340;
     int y = 120;
     
+    //Initializes a variable to keep track of the user's mouse clicks
     int mouseClicks = 0;
     
     /**
@@ -75,7 +93,8 @@ public class StoryGame extends World
     {    
         // Create a new world with 1280x720 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1); 
- 
+        
+        //Each URL is loaded into their designated queues(data structure) using the readInto method from the Reader class 
         try{
             Reader.readInto(introductory, "https://gist.githubusercontent.com/SameerHidery/a92b98a629cf64b44875c8e1b2ed5dc9/raw/00be957644600fc11c624fc5e154ed22b62604f4/IntroductoryChapter.txt");
             } catch(Exception e) {
@@ -121,18 +140,25 @@ public class StoryGame extends World
             } catch(Exception e) {
         }
         
+        //Sets the text of the instructions to black
         instructions.setLineColor(Color.BLACK);
         instructions.setFillColor(Color.BLACK);
         
+        //Adds the title and instruction labels
         addObject(titleLabel, 350, 200);
         addObject(instructions, 350, 400);
         
-        
+        //Adds the story labels
         addObject(storyLabel1, x, y);
         addObject(storyLabel2, x, y + 30);
         addObject(storyLabel3, x, y + 60);
         addObject(storyLabel4, x, y + 90);
         
+        //Adds the picture and the lamp 
+        addObject(picture, 980, 510);
+        addObject(lamp, 1150, 450);
+        
+        //Sets the volume of sounds
         rainAndThunder.setVolume(40);
         keyboard.setVolume(50);
         elevator.setVolume(20);
@@ -145,13 +171,19 @@ public class StoryGame extends World
     }
     public void act()
     {
+        //Sets the speed of greenfoot's execution to 50
+        Greenfoot.setSpeed(50);
+        
+        //Plays the background sound for the game
         rainAndThunder.play();
         
+        //Anytime the left button is clicked over the right button, the story changes accordingly and the choice is recorded
         if(Greenfoot.mouseClicked(trueButton) || Greenfoot.mouseClicked(choice1)){
             removeButtons();
             trueButtonValues();
         }
         
+        //Anytime the right button is clicked over the left button, the story changes accordingly and the choice is recorded
         if(Greenfoot.mouseClicked(falseButton) || Greenfoot.mouseClicked(choice2)){
             removeButtons();
             falseButtonValues();
@@ -166,6 +198,7 @@ public class StoryGame extends World
             }
         }
         
+        //Every mouse click continues the story
         if(Greenfoot.mouseClicked(null)){
             if(part == 0){
                 if(!introductory.isEmpty()){
@@ -292,6 +325,8 @@ public class StoryGame extends World
                         staticNoise.stop();
                     }
                     if(mouseClicks == 7){
+                        addObject(offLamp, lamp.getX(), lamp.getY());
+                        removeObject(lamp);
                         lightFlickers.play();
                         setBackground(new GreenfootImage("Dark Theme.png"));
                     }
@@ -328,8 +363,7 @@ public class StoryGame extends World
                         }
                         print(callMom);
                     }
-                    if(!callGrandma.isEmpty() && third == false)
-                    {
+                    if(!callGrandma.isEmpty() && third == false){
                         mouseClicks++;
                         if(mouseClicks == 2){
                             phoneDial.play();
@@ -351,6 +385,9 @@ public class StoryGame extends World
                 if(second == false){
                     if(!callManager.isEmpty() && (third == true || third == false)){
                         mouseClicks++;
+                        if(mouseClicks == 8){
+                            pictureChange();
+                        }
                         if(mouseClicks == 9){
                             staticNoise.play();
                         }
@@ -371,8 +408,7 @@ public class StoryGame extends World
             if(part == 4){
                 if(!viewFax.isEmpty() && fourth == true){
                     print(viewFax);
-                    if(viewFax.isEmpty())
-                    {
+                    if(viewFax.isEmpty()){
                         gameWon();
                     }
                 }
@@ -385,8 +421,7 @@ public class StoryGame extends World
             }
             
             if(part == 5){
-                if(!runToStairwell.isEmpty() && fifth == true)
-                {
+                if(!runToStairwell.isEmpty() && fifth == true){
                     mouseClicks++;
                     if(mouseClicks == 2){
                         rattleDoorHandle.play();
@@ -395,14 +430,12 @@ public class StoryGame extends World
                         siren.setVolume(15);
                     }
                     print(runToStairwell);
-                    if(runToStairwell.isEmpty())
-                    {
+                    if(runToStairwell.isEmpty()){
                         gameWon();
                         mouseClicks = 0;
                     }
                 }
-                if(!runToElevator.isEmpty() && fifth == false)
-                {
+                if(!runToElevator.isEmpty() && fifth == false){
                     mouseClicks++;
                     if(mouseClicks == 3){
                         setBackground(new GreenfootImage("Light Theme.png"));
@@ -412,8 +445,7 @@ public class StoryGame extends World
                         creepySuspense.play();
                     }
                     print(runToElevator);
-                    if(runToElevator.isEmpty())
-                    {
+                    if(runToElevator.isEmpty()){
                         gameLost();
                     }
                 }
@@ -421,16 +453,25 @@ public class StoryGame extends World
         }
     }
     
+    //Changes normal picture to creepy
+    public void pictureChange(){
+        addObject(creepyPicture, picture.getX(), picture.getY());
+        removeObject(picture);
+    }
+    
+    //Sets the world to lose screen 
     public void gameLost(){
         LostScreen lose = new LostScreen();
         Greenfoot.setWorld(lose);
     }
     
+    //Sets the world to win screen
     public void gameWon(){
         WinScreen win = new WinScreen();
         Greenfoot.setWorld(win);
     }
     
+    //Adds the buttons and their labels
     public void addButtons(){
         addObject(trueButton, 200, 360);
         addObject(falseButton, 480, 360);
@@ -438,6 +479,7 @@ public class StoryGame extends World
         addObject(choice2, falseButton.getX(), falseButton.getY());
     }
     
+    //Removes the buttons and their labels
     public void removeButtons(){
         removeObject(trueButton);
         removeObject(falseButton);
@@ -445,6 +487,7 @@ public class StoryGame extends World
         removeObject(choice2);
     }
     
+    //Stores the number of decisions when they're true into a hashmap
     public void trueButtonValues(){
         if(part == 0){
             decisions.put("one", true);
@@ -473,6 +516,7 @@ public class StoryGame extends World
         part++;
     }
     
+    //Stores the number of decisions when they're false into a hashmap
     public void falseButtonValues(){
         if(part == 0){
             decisions.put("one", false);
@@ -501,6 +545,7 @@ public class StoryGame extends World
         part++;
     }
     
+    //Creates a method to wrap a text 
     public void nextText(String str){
         if(str.length() > 41 && str.length() < 83){
             int line1 = str.lastIndexOf(" ", 41);
@@ -546,6 +591,7 @@ public class StoryGame extends World
         }
     }
     
+    //Prints the strings from a queue
         public void print(Queue<String> q){
         String sentence = q.dequeue();
         nextText(sentence);

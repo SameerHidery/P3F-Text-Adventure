@@ -1,0 +1,18 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Lamp with bulb on
+ * 
+ * author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
+ */
+public class LampOn extends Actor
+{
+    /**
+     * Act - do whatever the LampOn wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act()
+    {
+        // Add your action code here.
+    }
+}

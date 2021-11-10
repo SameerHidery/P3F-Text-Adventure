@@ -1,14 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class LostScreen here.
+ * Lose screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  */
 public class LostScreen extends World
 {
-
     /**
      * Constructor for objects of class LostScreen.
      * 
