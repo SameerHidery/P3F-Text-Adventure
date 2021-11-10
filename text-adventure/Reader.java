@@ -5,8 +5,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class Reader here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  */
 public class Reader
 {
