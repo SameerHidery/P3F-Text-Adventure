@@ -1,12 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class NormalPicture here.
+ * Frame with normal picture
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  */
-public class NormalPicture extends PictureFrame
+public class NormalPicture extends Actor
 {
     /**
      * Act - do whatever the NormalPicture wants to do. This method is called whenever

@@ -1,12 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class LampOn here.
+ * Lamp with bulb on
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * author Sameer Hidery, Murtaza Asrani, Keira Sutharsanaraj
  */
-public class LampOn extends Lamp
+public class LampOn extends Actor
 {
     /**
      * Act - do whatever the LampOn wants to do. This method is called whenever
